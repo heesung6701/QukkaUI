@@ -1,18 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:orientation="horizontal"
+        >
+        <com.quokkaman.qukkaui.BubbleRatioItemView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:label="봄"
+            app:value="50%"
+            app:labelPadding="5dp"
+            app:bubbleColor="@color/bubble_color"
+            android:layout_weight="1"
+            />
+        <com.quokkaman.qukkaui.BubbleRatioItemView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:label="여름"
+            app:value="50%"
+            app:labelPadding="50dp"
+            app:bubbleColor="@color/black"
+            android:layout_weight="1"
+            />
+        <com.quokkaman.qukkaui.BubbleRatioItemView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:label="가을"
+            app:value="50%"
+            app:bubbleColor="@color/bubble_color"
+            app:labelPadding="30dp"
+            android:layout_weight="1"
+            />
+        <com.quokkaman.qukkaui.BubbleRatioItemView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:label="겨울"
+            app:value="50%"
+            app:bubbleColor="@color/teal_200"
+            app:labelPadding="40dp"
+            android:layout_weight="0.6"
+            />
+    </LinearLayout>
+</LinearLayout>
