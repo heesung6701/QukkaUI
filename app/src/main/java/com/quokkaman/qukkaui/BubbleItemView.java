@@ -128,7 +128,7 @@ public class BubbleItemView extends View {
             case MeasureSpec.EXACTLY:
                 break;
             case MeasureSpec.AT_MOST:
-                heightSize = Math.min(getPaddingTop() + getPaddingBottom() + getSuggestedMinimumHeight() + widthSize + labelTextRect.height() + (int)labelPadding, heightSize);
+                heightSize = Math.min((int) Math.ceil(getPaddingTop() + getPaddingBottom() + getSuggestedMinimumHeight() + widthSize + labelTextRect.height() + labelPadding), heightSize);
                 break;
             case MeasureSpec.UNSPECIFIED:
             default:
@@ -152,7 +152,7 @@ public class BubbleItemView extends View {
         }
 
         canvas.drawCircle(bubbleCenterX, bubbleCenterY, bubbleRadius, bubblePaint);
-        if (value != null) {
+        if (value != null && valueTextRect.width() < displayRect.width()) {
             int shiftTextHalfHeight = valueTextRect.height() / 2;
             canvas.drawText(value, bubbleCenterX, bubbleCenterY + shiftTextHalfHeight, valuePaint);
         }
@@ -177,7 +177,7 @@ public class BubbleItemView extends View {
         int y = (int) event.getY();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if(touchRect.contains(x,y)) {
+                if (touchRect.contains(x, y)) {
                     final int[] pressedStateSet = new int[]{android.R.attr.state_pressed};
                     updatePaintColor(valuePaint, valueTextColorStateList, pressedStateSet);
                     updatePaintColor(labelPaint, labelTextColorStateList, pressedStateSet);
@@ -187,7 +187,7 @@ public class BubbleItemView extends View {
                 }
                 return false;
             case MotionEvent.ACTION_UP:
-                if(touchRect.contains(x,y)) {
+                if (touchRect.contains(x, y)) {
                     performClick();
                 }
             case MotionEvent.ACTION_CANCEL:
@@ -219,8 +219,12 @@ public class BubbleItemView extends View {
         this.value = value;
     }
 
+    public void setLabelGravity(int labelGravity) {
+        this.labelGravity = labelGravity;
+    }
+
     private void updatePaintColor(@NonNull Paint paint, @Nullable ColorStateList colorStateList, @NonNull int[] stateSet) {
-        if(colorStateList == null) return;
+        if (colorStateList == null) return;
         paint.setColor(colorStateList.getColorForState(stateSet, colorStateList.getDefaultColor()));
     }
 }
