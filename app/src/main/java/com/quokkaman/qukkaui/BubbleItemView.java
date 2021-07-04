@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-public class BubbleRatioItemView extends View {
+public class BubbleItemView extends View {
 
     @Nullable
     private String value;
@@ -49,30 +49,29 @@ public class BubbleRatioItemView extends View {
     @NonNull
     private final Rect labelTextRect = new Rect();
 
-    public BubbleRatioItemView(Context context) {
+    public BubbleItemView(Context context) {
         this(context, null);
     }
 
-    public BubbleRatioItemView(Context context, @Nullable AttributeSet attrs) {
+    public BubbleItemView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public BubbleRatioItemView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public BubbleItemView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public BubbleRatioItemView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public BubbleItemView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BubbleRatioItemView);
-
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BubbleItemView);
         try {
-            value = typedArray.getString(R.styleable.BubbleRatioItemView_value);
-            valueTextColorStateList = typedArray.getColorStateList(R.styleable.BubbleRatioItemView_valueTextColor);
+            value = typedArray.getString(R.styleable.BubbleItemView_value);
+            valueTextColorStateList = typedArray.getColorStateList(R.styleable.BubbleItemView_valueTextColor);
 
-            label = typedArray.getString(R.styleable.BubbleRatioItemView_label);
-            labelTextColorStateList = typedArray.getColorStateList(R.styleable.BubbleRatioItemView_labelTextColor);
-            labelPadding = typedArray.getDimension(R.styleable.BubbleRatioItemView_labelPadding, 0.0f);
-            bubbleColorStateList = typedArray.getColorStateList(R.styleable.BubbleRatioItemView_bubbleColor);
+            label = typedArray.getString(R.styleable.BubbleItemView_label);
+            labelTextColorStateList = typedArray.getColorStateList(R.styleable.BubbleItemView_labelTextColor);
+            labelPadding = typedArray.getDimension(R.styleable.BubbleItemView_labelPadding, 0.0f);
+            bubbleColorStateList = typedArray.getColorStateList(R.styleable.BubbleItemView_bubbleColor);
         } finally {
             typedArray.recycle();
         }
