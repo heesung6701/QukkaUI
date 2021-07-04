@@ -8,7 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -34,6 +34,7 @@ public class BubbleItemView extends View {
     private final Paint labelPaint;
 
     private float labelPadding;
+    private int labelGravity;
 
     @Nullable
     private final ColorStateList bubbleColorStateList;
@@ -42,6 +43,9 @@ public class BubbleItemView extends View {
 
     @NonNull
     private final Rect touchRect = new Rect();
+
+    @NonNull
+    private final Rect displayRect = new Rect();
 
     @NonNull
     private final Rect valueTextRect = new Rect();
@@ -71,6 +75,8 @@ public class BubbleItemView extends View {
             label = typedArray.getString(R.styleable.BubbleItemView_label);
             labelTextColorStateList = typedArray.getColorStateList(R.styleable.BubbleItemView_labelTextColor);
             labelPadding = typedArray.getDimension(R.styleable.BubbleItemView_labelPadding, 0.0f);
+            labelGravity = typedArray.getInt(R.styleable.BubbleItemView_labelGravity, Gravity.BOTTOM);
+
             bubbleColorStateList = typedArray.getColorStateList(R.styleable.BubbleItemView_bubbleColor);
         } finally {
             typedArray.recycle();
@@ -87,7 +93,7 @@ public class BubbleItemView extends View {
 
         labelPaint = new Paint();
         labelPaint.setTextAlign(Paint.Align.CENTER);
-        valuePaint.setColor(labelTextColorStateList != null ? labelTextColorStateList.getDefaultColor() : Color.BLACK);
+        labelPaint.setColor(labelTextColorStateList != null ? labelTextColorStateList.getDefaultColor() : Color.BLACK);
         labelPaint.setTextSize(48);
 
         if (label != null) {
@@ -135,12 +141,15 @@ public class BubbleItemView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        int width = getWidth() - getPaddingLeft() - getPaddingRight();
-        int height = getHeight() - getPaddingTop() - getPaddingBottom();
+        displayRect.set(getPaddingStart(), getPaddingTop(), getWidth() - getPaddingEnd(), getHeight() - getPaddingBottom());
 
-        int bubbleCenterX = (width) / 2 + getPaddingLeft();
+        int bubbleCenterX = (displayRect.width()) / 2 + getPaddingLeft();
         int bubbleCenterY = bubbleCenterX + getPaddingTop();
-        int bubbleRadius = width / 2;
+        int bubbleRadius = displayRect.width() / 2;
+
+        if (labelGravity == Gravity.TOP) {
+            bubbleCenterY += labelTextRect.height() + labelPadding;
+        }
 
         canvas.drawCircle(bubbleCenterX, bubbleCenterY, bubbleRadius, bubblePaint);
         if (value != null) {
@@ -148,7 +157,16 @@ public class BubbleItemView extends View {
             canvas.drawText(value, bubbleCenterX, bubbleCenterY + shiftTextHalfHeight, valuePaint);
         }
         if (label != null) {
-            canvas.drawText(label, bubbleCenterX, bubbleCenterY + bubbleRadius + labelTextRect.height() + labelPadding, labelPaint);
+            switch (labelGravity) {
+                case Gravity.TOP:
+                    canvas.drawText(label, bubbleCenterX, displayRect.top + labelTextRect.height(), labelPaint);
+                    break;
+                default:
+                case Gravity.BOTTOM:
+                    // getTextBound issue with special character and hangul.
+                    canvas.drawText(label, bubbleCenterX, displayRect.bottom - labelTextRect.bottom, labelPaint);
+                    break;
+            }
         }
         touchRect.set(bubbleCenterX - bubbleRadius, bubbleCenterY - bubbleRadius, bubbleCenterX + bubbleRadius, bubbleCenterY + bubbleRadius);
     }
