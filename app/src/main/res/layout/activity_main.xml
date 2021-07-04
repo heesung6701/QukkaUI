@@ -7,50 +7,166 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="gravity Test (top/bottom)" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <com.quokkaman.qukkaui.BubbleRatioItemView
-            android:layout_width="0dp"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <com.quokkaman.qukkaui.BubbleItemView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:layout_weight="50"
+            app:bubbleColor="@color/bubble_color"
             app:label="봄"
+            app:labelTextColor="@color/bubble_color"
             app:value="50%"
-            app:labelPadding="5dp"
-            app:bubbleColor="@color/bubble_color"
-            android:layout_weight="1"
-            />
-        <com.quokkaman.qukkaui.BubbleRatioItemView
-            android:layout_width="0dp"
+            app:valueTextColor="@color/white" />
+
+        <com.quokkaman.qukkaui.BubbleItemView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:layout_weight="30"
+            app:bubbleColor="@color/bubble_color"
             app:label="여름"
-            app:value="50%"
-            app:labelPadding="50dp"
-            app:bubbleColor="@color/black"
-            android:layout_weight="1"
-            />
-        <com.quokkaman.qukkaui.BubbleRatioItemView
-            android:layout_width="0dp"
+            app:labelTextColor="@color/bubble_color"
+            app:value="30%"
+            app:valueTextColor="@color/white" />
+
+        <com.quokkaman.qukkaui.BubbleItemView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            app:label="가을"
-            app:value="50%"
+            android:layout_weight="15"
             app:bubbleColor="@color/bubble_color"
-            app:labelPadding="30dp"
-            android:layout_weight="1"
-            />
-        <com.quokkaman.qukkaui.BubbleRatioItemView
+            app:labelTextColor="@color/bubble_color"
+            app:label="가을"
+            app:value="15%"
+            app:valueTextColor="@color/white" />
+
+        <com.quokkaman.qukkaui.BubbleItemView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            app:bubbleColor="@color/teal_200"
+            app:label="겨울"
+            app:labelTextColor="@color/bubble_color"
+            app:value="5%"
+            app:valueTextColor="@color/white" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="labelPadding and labelGravity" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <com.quokkaman.qukkaui.BubbleItemView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            app:label="겨울"
+            android:layout_weight="1"
+            app:bubbleColor="@color/bubble_color"
+            app:label="봄"
+            app:labelTextColor="@color/bubble_color"
+            app:labelPadding="10dp"
+            app:labelGravity="top"
             app:value="50%"
-            app:bubbleColor="@color/teal_200"
+            app:valueTextColor="@color/white" />
+
+        <com.quokkaman.qukkaui.BubbleItemView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:bubbleColor="@color/bubble_color"
+            app:label="여름"
+            app:labelTextColor="@color/bubble_color"
+            app:labelPadding="20dp"
+            app:labelGravity="bottom"
+            app:value="30%"
+            app:valueTextColor="@color/white" />
+
+        <com.quokkaman.qukkaui.BubbleItemView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:bubbleColor="@color/bubble_color"
+            app:label="가을"
+            app:labelTextColor="@color/bubble_color"
+            app:labelPadding="30dp"
+            app:labelGravity="top"
+            app:value="15%"
+            app:valueTextColor="@color/white" />
+
+        <com.quokkaman.qukkaui.BubbleItemView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:bubbleColor="@color/bubble_color"
+            app:label="겨울"
+            app:labelTextColor="@color/bubble_color"
             app:labelPadding="40dp"
-            android:layout_weight="0.6"
-            />
+            app:labelGravity="bottom"
+            app:value="5%"
+            app:valueTextColor="@color/white" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="fixed width" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.quokkaman.qukkaui.BubbleItemView
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            app:bubbleColor="@color/bubble_color"
+            app:label="봄"
+            app:labelGravity="bottom"
+            app:labelTextColor="@color/bubble_color"
+            app:value="50%"
+            app:valueTextColor="@color/white" />
+
+        <com.quokkaman.qukkaui.BubbleItemView
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            app:bubbleColor="@color/bubble_color"
+            app:label="여름"
+            app:labelGravity="top"
+            app:labelTextColor="@color/bubble_color"
+            app:value="50%"
+            app:valueTextColor="@color/white" />
+
+        <com.quokkaman.qukkaui.BubbleItemView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            app:bubbleColor="@color/bubble_color"
+            app:label="가을"
+            app:labelGravity="bottom"
+            app:labelTextColor="@color/bubble_color"
+            app:value="50%"
+            app:valueTextColor="@color/white" />
+
+        <com.quokkaman.qukkaui.BubbleItemView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            app:bubbleColor="@color/bubble_color"
+            app:label="겨울"
+            app:labelGravity="top"
+            app:labelTextColor="@color/bubble_color"
+            app:value="50%"
+            app:valueTextColor="@color/white" />
     </LinearLayout>
 </LinearLayout>
